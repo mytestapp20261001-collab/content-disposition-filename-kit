@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "slug": "content-disposition-filename-kit",
+  "domain": "protocol",
+  "guidance_group": "light",
+  "source_commit": "1286096c10a23bbb04aca83679ae3c31f3326030",
+  "source_repository": "mytestapp20261001-collab/mytest-engineering-toolbox",
+  "source_repository_id": 1411411288,
+  "source_path": "tools/content-disposition-filename-kit",
+  "root_path": ".",
+  "publication_status": "prepared_only; coordinator verifies final repository identity and remote CI",
+  "expected_repository": "mytestapp20261001-collab/content-disposition-filename-kit",
+  "repository_id": null,
+  "preserved_files": [
+    {
+      "path": "README.md",
+      "size_bytes": 3820,
+      "sha256": "4c2dfe61f8e47552b51bd50e5b12d79a61b58a3139e0b819d0920dcc077e8544",
+      "git_blob_sha1": "4a9a8bc9fb37a1dbe1dfd147c9e7621d19822a4b",
+      "utf8": true,
+      "source_path": "tools/content-disposition-filename-kit/README.md"
+    },
+    {
+      "path": "SKILL.md",
+      "size_bytes": 849,
+      "sha256": "77ade4ccebacf74e9f072853cf9d867d131aebb98feabf771fcbc204817e2198",
+      "git_blob_sha1": "b2f56dbd44ffad64cf40623d570ea2edeaa28d66",
+      "utf8": true,
+      "source_path": "tools/content-disposition-filename-kit/SKILL.md"
+    },
+    {
+      "path": "examples/bad.json",
+      "size_bytes": 81,
+      "sha256": "d8faf826defea0f46263ada618079da14d660d312839f08d015d95adee72bac1",
+      "git_blob_sha1": "129a16e82643c82339c57a8c83954371bfe1f7dd",
+      "utf8": true,
+      "source_path": "tools/content-disposition-filename-kit/examples/bad.json"
+    },
+    {
+      "path": "examples/good.json",
+      "size_bytes": 102,
+      "sha256": "c762b7b9e0a6a7f9575d9c669adc9f4430b5e58397f5ea09cd8c8dab4fb9eb08",
+      "git_blob_sha1": "65eae3622db0ebdb4c25cac12606d95d968b2dab",
+      "utf8": true,
+      "source_path": "tools/content-disposition-filename-kit/examples/good.json"
+    },
+    {
+      "path": "test_tool.py",
+      "size_bytes": 6205,
+      "sha256": "8e1d44f454e8a9b82f4b1b5db0ba6ae9af38d32731eea13f0fcfab7b888bf524",
+      "git_blob_sha1": "ac3605f6d8cf8f53ea7eb261670d5e1e9397f25e",
+      "utf8": true,
+      "source_path": "tools/content-disposition-filename-kit/test_tool.py"
+    },
+    {
+      "path": "tool.py",
+      "size_bytes": 8554,
+      "sha256": "3069090c7a93ae39a5be5fabcb1fdb83b4f172933159aa1bf780f19a9d0f0c48",
+      "git_blob_sha1": "918b0e7ba0631d0449ee9894f9b0e2d4d93bdbad",
+      "utf8": true,
+      "source_path": "tools/content-disposition-filename-kit/tool.py"
+    },
+    {
+      "path": "LICENSE",
+      "size_bytes": 1076,
+      "sha256": "dce76471613629e93f3f98b7aaa6f72ff9adb88204a3f83d3045952017ab2f46",
+      "git_blob_sha1": "677c4463d59b560db9c1fde1052eff6eefa6441a",
+      "utf8": true,
+      "source_path": "LICENSE"
+    },
+    {
+      "path": ".gitignore",
+      "size_bytes": 62,
+      "sha256": "e4d5aecc4cd36f593c2e7f3dad08b24261b13466b898004a445614058d29d8de",
+      "git_blob_sha1": "fe9f8fb619601213cbfef4f6eadb5d413d8f7f01",
+      "utf8": true,
+      "source_path": ".gitignore"
+    }
+  ],
+  "readme_checks": [
+    {
+      "label": "README example",
+      "args": [
+        "tool.py",
+        "--input",
+        "examples/good.json",
+        "--pretty"
+      ],
+      "expected_exit": 0,
+      "output": "json",
+      "documented_command": "python3 tool.py --input examples/good.json --pretty"
+    },
+    {
+      "label": "README example",
+      "args": [
+        "tool.py",
+        "--input",
+        "examples/bad.json",
+        "--pretty"
+      ],
+      "expected_exit": 1,
+      "output": "json",
+      "documented_command": "python3 tool.py --input examples/bad.json --pretty  # expected exit 1: traversal"
+    },
+    {
+      "label": "CLI help",
+      "args": [
+        "tool.py",
+        "--help"
+      ],
+      "expected_exit": 0,
+      "output": "help"
+    },
+    {
+      "label": "CLI missing input",
+      "args": [
+        "tool.py"
+      ],
+      "expected_exit": 2,
+      "output": "json"
+    },
+    {
+      "label": "CLI unknown argument",
+      "args": [
+        "tool.py",
+        "--unsupported-migration-test"
+      ],
+      "expected_exit": 2,
+      "output": "json"
+    }
+  ]
+}
