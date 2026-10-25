@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "repository": "mytestapp20261001-collab/content-disposition-filename-kit",
+  "repository_id": 1413206222,
+  "base_commit": "1ced8dcad94366ac3528a2617d6a4d35ae22b623",
+  "date": "2026-10-25",
+  "scope": "UTF-8 filename byte-length hazard heuristic; JSON schema, CLI privacy, guidance group and invitation unchanged. MIGRATION.json remains immutable. Synthetic evidence is not natural adoption.",
+  "changes": [
+    {
+      "path": "tool.py",
+      "original_sha256": "3069090c7a93ae39a5be5fabcb1fdb83b4f172933159aa1bf780f19a9d0f0c48",
+      "current_sha256": "60f98bebdc43ca8cad38dddb36bf88b3008d4a7dd1ee71ab625fe2c0fd68becb",
+      "reason": "Detect multibyte names exceeding 255 UTF-8 bytes; preserve character-count output and document heuristic limits."
+    },
+    {
+      "path": "test_tool.py",
+      "original_sha256": "8e1d44f454e8a9b82f4b1b5db0ba6ae9af38d32731eea13f0fcfab7b888bf524",
+      "current_sha256": "86a3b09abbba7043eb37127dbea3bb679b44b0d7f3e4a8c29e63754b916128fe",
+      "reason": "Detect multibyte names exceeding 255 UTF-8 bytes; preserve character-count output and document heuristic limits."
+    },
+    {
+      "path": "README.md",
+      "original_sha256": "4c2dfe61f8e47552b51bd50e5b12d79a61b58a3139e0b819d0920dcc077e8544",
+      "current_sha256": "8df87191b35daea8dad8242ef014340c33fec6ae3afb410c43013ab3af8eb341",
+      "reason": "Detect multibyte names exceeding 255 UTF-8 bytes; preserve character-count output and document heuristic limits."
+    }
+  ]
+}

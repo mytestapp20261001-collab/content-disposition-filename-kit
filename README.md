@@ -48,7 +48,10 @@ encoded words, arbitrary charsets and browser-specific recovery are not supporte
 Checks include slash/backslash paths, dot segments, drive/absolute paths, control
 and Unicode format characters, leading spaces/trailing spaces or dots, Windows
 reserved characters/device names, residual percent escapes, NFC normalization
-changes, long components and a small executable-extension review list. These are
+changes, components exceeding 255 UTF-8 bytes and a small executable-extension
+review list. The byte threshold models a common filesystem limit, not every
+filesystem or encoding; candidate `characters` remains a Unicode character count.
+These are
 portable review heuristics, not a complete filesystem policy, MIME/content check,
 malware scanner, safe-name generator or save authorization. The extension list is
 not exhaustive and absence of an executable extension does not imply safety.
