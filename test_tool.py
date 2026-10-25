@@ -109,4 +109,35 @@ class FilenameTests(unittest.TestCase):
     def test_escape_backslash(self):
         out=self.audit_header('attachment; filename="a\\\\b.txt"')
         self.assertIn('contains_path_separator',{v['code'] for v in out['findings']})
+class FilenameByteLengthTests(unittest.TestCase):
+    def test_utf8_byte_boundaries(self):
+        from urllib.parse import quote
+        for name, expected in [('a'*255, False), ('a'*256, True),
+                               ('é'*127, False), ('é'*127+'a', False),
+                               ('é'*128, True), ('😀'*63+'abc', False),
+                               ('😀'*64, True)]:
+            with self.subTest(characters=len(name), byte_length=len(name.encode('utf-8'))):
+                out = tool.audit({'content_disposition': "attachment; filename*=UTF-8''" + quote(name, safe='')})
+                codes = [f['code'] for f in out['findings']]
+                self.assertEqual('long_filename_component' in codes, expected)
+                self.assertEqual(codes.count('long_filename_component'), int(expected))
+                self.assertEqual(out['ok'], not expected)
+                self.assertEqual(out['candidates'][0]['characters'], len(name))
+
+    def test_latin1_name_is_measured_as_utf8(self):
+        out = tool.audit({'content_disposition': "attachment; filename*=ISO-8859-1''" + '%E9'*128})
+        self.assertEqual([f['code'] for f in out['findings']], ['long_filename_component'])
+
+    def test_cli_long_unicode_name_is_redacted_hazard(self):
+        from urllib.parse import quote
+        name = 'é'*128
+        raw = json.dumps({'content_disposition': "attachment; filename*=UTF-8''" + quote(name, safe='')})
+        run = subprocess.run([sys.executable, str(ROOT/'tool.py')], input=raw, text=True, capture_output=True)
+        self.assertEqual(run.returncode, 1)
+        self.assertEqual(run.stderr, '')
+        self.assertNotIn(name, run.stdout)
+        self.assertNotIn(quote(name, safe=''), run.stdout)
+        self.assertEqual(json.loads(run.stdout)['findings'][0]['code'], 'long_filename_component')
+
 if __name__=='__main__': unittest.main()
+

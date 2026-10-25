@@ -135,7 +135,8 @@ def decode_extended(raw):
 def inspect_filename(value):
     findings=[]
     if not value: findings.append('empty_filename')
-    if len(value)>255: findings.append('long_filename_component')
+    # UTF-8 byte length is a portable review heuristic, not a filesystem guarantee.
+    if len(value.encode('utf-8', 'surrogatepass'))>255: findings.append('long_filename_component')
     if '/' in value or '\\' in value: findings.append('contains_path_separator')
     if value in ('.','..') or '..' in re.split(r'[/\\]',value): findings.append('dot_path_segment')
     if value.startswith(('/','\\')) or re.match(r'^[A-Za-z]:',value): findings.append('absolute_or_drive_path')
